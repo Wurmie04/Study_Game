@@ -1,5 +1,6 @@
 package com.example.studygame
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -139,6 +140,12 @@ class MainActivity : AppCompatActivity() {
 
             setContentView(menuItems)
         }
-        //setContentView(R.layout.activity_main)
+
+        //Go To Multiple Choice Scene
+        QuizCard.setOnClickListener{
+            val intent = Intent(this,MultipleChoiceActivity::class.java)
+            startActivity(intent)
+        }
+    //setContentView(R.layout.activity_main)
     }
 }
