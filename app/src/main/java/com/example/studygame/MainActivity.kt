@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
                 setPadding(0,20, 0,0)
             }
+            //Quiz Card Game
             button("Quiz Game"){
                 textSize = 20.0F
                 setOnClickListener{
