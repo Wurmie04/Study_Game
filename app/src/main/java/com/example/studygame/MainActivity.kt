@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //Online says to use Fragments or ViewAnimator. Will learn later
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //Try in DSL format :/
 
 
         //Main Menu Layout
