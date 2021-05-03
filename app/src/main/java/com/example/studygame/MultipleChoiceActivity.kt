@@ -2,6 +2,7 @@ package com.example.studygame
 
 import android.content.Intent
 import android.graphics.Color
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +17,16 @@ import org.w3c.dom.Text
 
 //Multiple Choice Game
 class MultipleChoiceActivity : AppCompatActivity() {
+    private var score = 0
+    private var scoreText = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //Create list of Questions and Answers
-        val AnimeList : MutableList<String> = mutableListOf("Hello")
-        val AnimeListAnswers : MutableList<String> = mutableListOf("hi")
+        val List1 : MutableList<String> = mutableListOf("0","1","2","3","4","5","6","7","8","9")
+        val List1Answer : MutableList<String> = mutableListOf("a","b","c","d","e","f","g","h","i","j")
 
-        val randomWords : MutableList<String> = mutableListOf("Chinese", "Cabbage", "Extra Gum")
         //Choose which list to use
         verticalLayout{
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -38,7 +41,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
             button("Computer Science"){
                 textSize = 20.0F
                 setOnClickListener{
-                    startGame()
+                    startGame(List1,List1Answer)
                 }
             }
             button("Animals"){
@@ -57,98 +60,114 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_multiple_choice)
     }
 
-    private fun startGame() {
+    private fun startGame(qList:MutableList<String>,qAnswer:MutableList<String>) {
         //delete the previous menu
         linearLayout().removeAllViews()
 
         //bring up the xml design view
         setContentView(R.layout.activity_multiple_choice)
 
+        //set up what is under the cards
+        //0 1
+        //2 3
+        //4 5
+        //6 7
+        //get 8 random numbers that points to Questions List
+        //from x to number of items in questions list
+        val questionSize = qList.size
+        val qNa = (0..questionSize).random()
+
+        //get the values to be used
+
+        //randomize them (shuffle)
+
+
         //create score and buttons
         verticalLayout{
             gravity = Gravity.CENTER
             //score
-            textView("0"){
+            textView("Score: $score"){
+                id = R.id.score
                 textSize = 20.0F
                 setTextColor(Color.BLACK)
                 setBackgroundColor(Color.WHITE)
-                gravity = Gravity.CENTER
-                //setPadding(0,10, 0,0)
+                gravity = Gravity.CENTER or Gravity.TOP
             }
+            //Question
+            textView("${qList.get(qNa)}"){
+                textSize = 25.0F
+                setTextColor(Color.BLACK)
+                setBackgroundColor(Color.WHITE)
+                gravity = Gravity.CENTER or Gravity.TOP
+            }
+            //Answers
             //first row
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("Animal with long neck"){
-
+                button(""){
+                    setOnClickListener{
+                        //play()
+                    }
                 }.lparams(width = 70, height = 70)
-                button("Giraffe"){
-
+                button(""){
+                    setOnClickListener{
+                        play(1, qNa, qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
             }
             //second row
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("Animal with long neck"){
-
+                button(""){
+                    setOnClickListener{
+                        play(2, qNa,qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
-                button("Giraffe"){
-
+                button(""){
+                    setOnClickListener{
+                        play(3,qNa,qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
             }
             //third row
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("Animal with long neck"){
-
+                button(""){
+                    setOnClickListener{
+                        play(4, qNa,qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
-                button("Giraffe"){
-
+                button(""){
+                    setOnClickListener{
+                        play(5,qNa,qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
             }
             //last row
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("Animal with long neck"){
-
+                button(""){
+                    setOnClickListener{
+                        play(6, qNa,qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
-                button("Giraffe"){
-
+                button(""){
+                    setOnClickListener{
+                        play(7,qNa,qList,qAnswer)
+                    }
                 }.lparams(width = 70, height = 70)
             }
             button("Quit Game"){
                 textSize = 15.0F
             }.lparams(width = 60, height = 30)
         }
-        //start the game
-        /*
-        TL.setOnClickListener{
+    }
 
-        }
-        TR.setOnClickListener{
+    private fun play(position : Int, questionPos : Int, qList:MutableList<String>, qAnswer:MutableList<String>){
 
-        }
-        TLC.setOnClickListener{
-
-        }
-        TRC.setOnClickListener{
-
-        }
-        BLC.setOnClickListener{
-
-        }
-        BRC.setOnClickListener{
-
-        }
-        BR.setOnClickListener{
-
-        }
-        BL.setOnClickListener{
-
-        }
-*/
     }
 }
