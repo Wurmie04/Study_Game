@@ -18,7 +18,6 @@ import org.w3c.dom.Text
 //Multiple Choice Game
 class MultipleChoiceActivity : AppCompatActivity() {
     private var score = 0
-    private var scoreText = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,12 +74,9 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //get 8 random numbers that points to Questions List
         //from x to number of items in questions list
         val questionSize = qList.size
-        val qNa = (0..questionSize).random()
+        qList.shuffle()
 
-        //get the values to be used
-
-        //randomize them (shuffle)
-
+        val qNa = (0..7).random()
 
         //create score and buttons
         verticalLayout{
@@ -105,12 +101,12 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button(""){
+                button("${qList.get(0)}"){
                     setOnClickListener{
-                        //play()
+                        play(0,qNa, qList, qAnswer)
                     }
                 }.lparams(width = 70, height = 70)
-                button(""){
+                button("${qList.get(1)}"){
                     setOnClickListener{
                         play(1, qNa, qList,qAnswer)
                     }
@@ -120,12 +116,12 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button(""){
+                button("${qList.get(2)}"){
                     setOnClickListener{
                         play(2, qNa,qList,qAnswer)
                     }
                 }.lparams(width = 70, height = 70)
-                button(""){
+                button("${qList.get(3)}"){
                     setOnClickListener{
                         play(3,qNa,qList,qAnswer)
                     }
@@ -135,12 +131,12 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button(""){
+                button("${qList.get(4)}"){
                     setOnClickListener{
                         play(4, qNa,qList,qAnswer)
                     }
                 }.lparams(width = 70, height = 70)
-                button(""){
+                button("${qList.get(5)}"){
                     setOnClickListener{
                         play(5,qNa,qList,qAnswer)
                     }
@@ -150,12 +146,12 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button(""){
+                button("${qList.get(6)}"){
                     setOnClickListener{
                         play(6, qNa,qList,qAnswer)
                     }
                 }.lparams(width = 70, height = 70)
-                button(""){
+                button("${qList.get(7)}"){
                     setOnClickListener{
                         play(7,qNa,qList,qAnswer)
                     }
@@ -163,11 +159,16 @@ class MultipleChoiceActivity : AppCompatActivity() {
             }
             button("Quit Game"){
                 textSize = 15.0F
+                setOnClickListener{
+                    startActivity<MainActivity>("id" to 5)
+                }
             }.lparams(width = 60, height = 30)
         }
     }
 
-    private fun play(position : Int, questionPos : Int, qList:MutableList<String>, qAnswer:MutableList<String>){
-
+    private fun play(clickedPosition : Int, answerPosition : Int, qList:MutableList<String>, qAnswer:MutableList<String>){
+        if (clickedPosition == answerPosition) {
+            score = score + 1
+        }
     }
 }
