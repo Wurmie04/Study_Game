@@ -66,6 +66,10 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //bring up the xml design view
         setContentView(R.layout.activity_multiple_choice)
 
+        var didWin = false
+        var layoutView : MutableList<LinearLayout> = mutableListOf()
+        var txtView : MutableList<TextView> = mutableListOf()
+        var buttonView : MutableList<Button> = mutableListOf()
         //set up what is under the cards
         //0 1
         //2 3
@@ -83,6 +87,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
             //score
             textView("Score: $score"){
+                txtView.add(this)
                 id = R.id.score
                 textSize = 20.0F
                 setTextColor(Color.BLACK)
@@ -91,6 +96,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
             }
             //Question
             textView("${qList.get(qNa)}"){
+                txtView.add(this)
                 textSize = 25.0F
                 setTextColor(Color.BLACK)
                 setBackgroundColor(Color.WHITE)
@@ -102,13 +108,29 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
 
                 button("${qList.get(0)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(0,qNa, qList, qAnswer)
+                        didWin = play(0,qNa, qList, qAnswer)
+                        //txtView.get(0).text = "here"
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
                 button("${qList.get(1)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(1, qNa, qList,qAnswer)
+                        didWin = play(1, qNa, qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
             }
@@ -117,13 +139,27 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
 
                 button("${qList.get(2)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(2, qNa,qList,qAnswer)
+                        didWin = play(2, qNa,qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
                 button("${qList.get(3)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(3,qNa,qList,qAnswer)
+                        didWin = play(3,qNa,qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
             }
@@ -132,13 +168,27 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
 
                 button("${qList.get(4)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(4, qNa,qList,qAnswer)
+                        didWin = play(4, qNa,qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
                 button("${qList.get(5)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(5,qNa,qList,qAnswer)
+                        didWin = play(5,qNa,qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
             }
@@ -147,13 +197,27 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
 
                 button("${qList.get(6)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(6, qNa,qList,qAnswer)
+                        didWin = play(6, qNa,qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
                 button("${qList.get(7)}"){
+                    buttonView.add(this)
                     setOnClickListener{
-                        play(7,qNa,qList,qAnswer)
+                        didWin = play(7,qNa,qList,qAnswer)
+                        if(didWin){
+                            setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            setBackgroundColor((Color.RED))
+                        }
                     }
                 }.lparams(width = 70, height = 70)
             }
@@ -166,9 +230,11 @@ class MultipleChoiceActivity : AppCompatActivity() {
         }
     }
 
-    private fun play(clickedPosition : Int, answerPosition : Int, qList:MutableList<String>, qAnswer:MutableList<String>){
+    private fun play(clickedPosition : Int, answerPosition : Int, qList:MutableList<String>, qAnswer:MutableList<String>): Boolean{
         if (clickedPosition == answerPosition) {
             score = score + 1
+            return true
         }
+        return false
     }
 }
