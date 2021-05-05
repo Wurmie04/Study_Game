@@ -1,5 +1,6 @@
 package com.example.studygame
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.nfc.Tag
@@ -18,6 +19,8 @@ import org.w3c.dom.Text
 //Multiple Choice Game
 class MultipleChoiceActivity : AppCompatActivity() {
     private var score = 0
+    private var qNa = 0
+    private var index : MutableList<Int> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +63,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_multiple_choice)
     }
 
-    private fun startGame(qList:MutableList<String>,qAnswer:MutableList<String>) {
+    @SuppressLint("SetTextI18n")
+    private fun startGame(qList:MutableList<String>, qAnswer:MutableList<String>) {
         //delete the previous menu
         linearLayout().removeAllViews()
 
@@ -68,9 +72,9 @@ class MultipleChoiceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_multiple_choice)
 
         var didWin = false
-        var layoutView : MutableList<LinearLayout> = mutableListOf()
-        var txtView : MutableList<TextView> = mutableListOf()
-        var buttonView : MutableList<Button> = mutableListOf()
+        val layoutView : MutableList<LinearLayout> = mutableListOf()
+        val txtView : MutableList<TextView> = mutableListOf()
+        val buttonView : MutableList<Button> = mutableListOf()
         //set up what is under the cards
         //0 1
         //2 3
@@ -78,12 +82,12 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //6 7
         //get 8 random numbers that points to Questions List
         //from x to number of items in questions list
-        val index : MutableList<Int> = MutableList(qList.size){i->(i)}
-        val questionSize = qList.size
+        index = MutableList(qList.size){i->(i)}
         index.shuffle()
 
-        val qNa = (0..7).random()
+        qNa = (0..7).random()
 
+        //I think you can loop this to make the code easier
         //create score and buttons
         verticalLayout{
             gravity = Gravity.CENTER
@@ -97,7 +101,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER or Gravity.TOP
             }
             //Question
-            textView("${qList.get(index.get(qNa))}"){
+            textView(qList.get(index.get(qNa))){
                 txtView.add(this)
                 textSize = 25.0F
                 setTextColor(Color.BLACK)
@@ -109,13 +113,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("${qAnswer.get(index.get(0))}"){
+                button(qAnswer.get(index.get(0))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(0,qNa, qList, qAnswer)
+                        didWin = play(0,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,index,qList,qAnswer)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -123,13 +127,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         }
                     }
                 }.lparams(width = 70, height = 70)
-                button("${qAnswer.get(index.get(1))}"){
+                button(qAnswer.get(index.get(1))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(1, qNa, qList,qAnswer)
+                        didWin = play(1, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            //update(layoutView, txtView, buttonView,qList)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -142,13 +146,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("${qAnswer.get(index.get(2))}"){
+                button(qAnswer.get(index.get(2))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(2, qNa,qList,qAnswer)
+                        didWin = play(2, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            //update(layoutView, txtView, buttonView)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -156,13 +160,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         }
                     }
                 }.lparams(width = 70, height = 70)
-                button("${qAnswer.get(index.get(3))}"){
+                button(qAnswer.get(index.get(3))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(3,qNa,qList,qAnswer)
+                        didWin = play(3,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            //update(layoutView, txtView, buttonView)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -175,13 +179,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("${qAnswer.get(index.get(4))}"){
+                button(qAnswer.get(index.get(4))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(4, qNa,qList,qAnswer)
+                        didWin = play(4, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,index,qList,qAnswer)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -189,13 +193,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         }
                     }
                 }.lparams(width = 70, height = 70)
-                button("${qAnswer.get(index.get(5))}"){
+                button(qAnswer.get(index.get(5))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(5,qNa,qList,qAnswer)
+                        didWin = play(5,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            //update(layoutView, txtView, buttonView)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -208,13 +212,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
             linearLayout{
                 gravity = Gravity.CENTER
 
-                button("${qAnswer.get(index.get(6))}"){
+                button(qAnswer.get(index.get(6))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(6, qNa,qList,qAnswer)
+                        didWin = play(6, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            //update(layoutView, txtView, buttonView)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -222,13 +226,13 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         }
                     }
                 }.lparams(width = 70, height = 70)
-                button("${qAnswer.get(index.get(7))}"){
+                button(qAnswer.get(index.get(7))){
                     buttonView.add(this)
                     setOnClickListener{
-                        didWin = play(7,qNa,qList,qAnswer)
+                        didWin = play(7,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            //update(layoutView, txtView, buttonView)
+                            update(layoutView, txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -246,7 +250,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         }
     }
 
-    private fun play(clickedPosition : Int, answerPosition : Int, qList:MutableList<String>, qAnswer:MutableList<String>): Boolean{
+    private fun play(clickedPosition : Int, answerPosition : Int): Boolean{
         if (clickedPosition == answerPosition) {
             score = score + 1
             return true
@@ -258,8 +262,18 @@ class MultipleChoiceActivity : AppCompatActivity() {
     }
 
     //update score. Put new question and answers
-    private fun update(layout: MutableList<LinearLayout>, text : MutableList<TextView>, buttons : MutableList<Button>, index : MutableList<Int>,
+    private fun update(layout: MutableList<LinearLayout>, text : MutableList<TextView>, buttons : MutableList<Button>,
                        qList: MutableList<String>, qAnswer: MutableList<String>){
+        index.shuffle()
+        qNa = (0..7).random()
 
+        text.get(0).text = "Score: $score"
+        text.get(1).text = qList.get(index.get(qNa))
+        var i = 0
+        for(buttons in buttons) {
+            buttons.text = qAnswer.get(index.get(i))
+            i = i + 1
+            buttons.setBackgroundColor(Color.LTGRAY)
+        }
     }
 }

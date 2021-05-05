@@ -43,12 +43,13 @@ class MainActivity : AppCompatActivity() {
                     startActivity<MultipleChoiceActivity>("id" to 5)
                 }
             }
-            button("Jeapardy"){
+            /*button("Jeapardy"){
                 textSize = 20.0F
                 setOnClickListener{
 
                 }
             }
+            */
             button("Memory Game"){
                 textSize = 20.0F
                 setOnClickListener{
