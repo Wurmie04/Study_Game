@@ -43,7 +43,6 @@ class MultipleChoiceActivity : AppCompatActivity() {
             button("Computer Science"){
                 textSize = 20.0F
                 setOnClickListener{
-                    //Log.d("TAG", L1qna.get(1).get(0))
                     startGame(List1,List1Answer)
                 }
             }
@@ -60,7 +59,6 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 }
             }
         }
-        //setContentView(R.layout.activity_multiple_choice)
     }
 
     @SuppressLint("SetTextI18n")
@@ -72,7 +70,6 @@ class MultipleChoiceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_multiple_choice)
 
         var didWin = false
-        val layoutView : MutableList<LinearLayout> = mutableListOf()
         val txtView : MutableList<TextView> = mutableListOf()
         val buttonView : MutableList<Button> = mutableListOf()
         //set up what is under the cards
@@ -117,15 +114,19 @@ class MultipleChoiceActivity : AppCompatActivity() {
                     buttonView.add(this)
                     setOnClickListener{
                         didWin = play(0,qNa)
+                        //Green if you won
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            //update the screen to give new questions and answers
+                            update(txtView, buttonView,qList,qAnswer)
                         }
+                        //red if you lost
                         else{
                             setBackgroundColor((Color.RED))
                             txtView.get(0).text = "Score: ${score}"
                         }
                     }
+                //same for every button
                 }.lparams(width = 70, height = 70)
                 button(qAnswer.get(index.get(1))){
                     buttonView.add(this)
@@ -133,7 +134,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(1, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -152,7 +153,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(2, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -166,7 +167,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(3,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -185,7 +186,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(4, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -199,7 +200,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(5,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -218,7 +219,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(6, qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -232,7 +233,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         didWin = play(7,qNa)
                         if(didWin){
                             setBackgroundColor(Color.GREEN)
-                            update(layoutView, txtView, buttonView,qList,qAnswer)
+                            update(txtView, buttonView,qList,qAnswer)
                         }
                         else{
                             setBackgroundColor((Color.RED))
@@ -241,15 +242,20 @@ class MultipleChoiceActivity : AppCompatActivity() {
                     }
                 }.lparams(width = 70, height = 70)
             }
+            //Quits the game and stores the end score into database
             button("Quit Game"){
                 textSize = 15.0F
                 setOnClickListener{
+                    //puts score into database
+                    submitAddServiceReq(score)
+                    //goes back to main menu
                     startActivity<MainActivity>("id" to 5)
                 }
             }.lparams(width = 60, height = 30)
         }
     }
 
+    //updates the user score
     private fun play(clickedPosition : Int, answerPosition : Int): Boolean{
         if (clickedPosition == answerPosition) {
             score = score + 1
@@ -262,7 +268,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
     }
 
     //update score. Put new question and answers
-    private fun update(layout: MutableList<LinearLayout>, text : MutableList<TextView>, buttons : MutableList<Button>,
+    private fun update(text : MutableList<TextView>, buttons : MutableList<Button>,
                        qList: MutableList<String>, qAnswer: MutableList<String>){
         index.shuffle()
         qNa = (0..7).random()
