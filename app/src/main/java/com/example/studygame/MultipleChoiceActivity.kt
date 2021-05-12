@@ -6,13 +6,16 @@ import android.graphics.Color
 import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_multiple_choice.*
+import kotlinx.coroutines.*
 import org.jetbrains.anko.*
 import org.w3c.dom.Text
 
@@ -21,6 +24,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
     private var score = 0
     private var qNa = 0
     private var index : MutableList<Int> = mutableListOf()
+    var HSscore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //Create list of Questions and Answers
         val List1 : MutableList<String> = mutableListOf("0","1","2","3","4","5","6","7","8","9")
         val List1Answer : MutableList<String> = mutableListOf("a","b","c","d","e","f","g","h","i","j")
+
 
         //Choose which list to use
         verticalLayout{
@@ -58,17 +63,39 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
                 }
             }
+            button("Get High Score") {
+                textSize = 20.0F
+                setOnClickListener{
+                    submitGetHSServiceReq(MultipleChoiceActivity())
+                    createHighScoreLayout()
+                }
+            }
         }
+    }
+    private fun createHighScoreLayout() {
+        verticalLayout{
+            gravity = Gravity.CENTER
+            textView("High Score"){
+                textSize = 20.0F
+            }
+            textView("$HSscore"){
+                textSize = 20.0F
+            }
+            button("Return"){
+                textSize = 20.0F
+                setOnClickListener {
+                    startActivity<MultipleChoiceActivity>("id" to 7)
+                }
+            }
+        }
+    }
+
+    public fun SQLscore(outScore : Int){
+        HSscore = outScore
     }
 
     @SuppressLint("SetTextI18n")
     private fun startGame(qList:MutableList<String>, qAnswer:MutableList<String>) {
-        //delete the previous menu
-        linearLayout().removeAllViews()
-
-        //bring up the xml design view
-        setContentView(R.layout.activity_multiple_choice)
-
         var didWin = false
         val txtView : MutableList<TextView> = mutableListOf()
         val buttonView : MutableList<Button> = mutableListOf()
@@ -242,16 +269,26 @@ class MultipleChoiceActivity : AppCompatActivity() {
                     }
                 }.lparams(width = 70, height = 70)
             }
-            //Quits the game and stores the end score into database
-            button("Quit Game"){
-                textSize = 15.0F
-                setOnClickListener{
-                    //puts score into database
-                    submitAddServiceReq(score)
-                    //goes back to main menu
-                    startActivity<MainActivity>("id" to 5)
+            linearLayout{
+                gravity = Gravity.CENTER
+                //Quits the game and stores the end score into database
+                button("Main Menu"){
+                    textSize = 15.0F
+                    setOnClickListener{
+                        //puts score into database
+                        submitAddServiceReq(score)
+                        //goes back to main menu
+                        startActivity<MainActivity>("id" to 5)
+                    }
+                }.lparams(width = 60, height = 30)
+                button("List Menu"){
+                    textSize = 15.0F
+                    setOnClickListener{
+                        submitAddServiceReq(score)
+                        startActivity<MultipleChoiceActivity>("id" to 6)
+                    }
                 }
-            }.lparams(width = 60, height = 30)
+            }
         }
     }
 
