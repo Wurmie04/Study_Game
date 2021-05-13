@@ -27,16 +27,16 @@ fun submitAddServiceReq(myScore : Int) {
         }
     }
 }
-fun submitGetHSServiceReq(outScore : MultipleChoiceActivity){
+fun submitGetHSServiceReq(outScore : MultipleChoiceActivity, t : TextView){
     var sScore = 0
     //get high scores for Multiple Choice
     Fuel.get("http://192.168.0.15:8080/StudyGame/MCHighScore").response(){
             request,response,result->
-        var(data,error) = result
+        val (data,error) = result
         if(data!=null){
-            val fStr = String(data!!)
-            sScore = Json.decodeFromString<Int>(fStr)
-            outScore.SQLscore(sScore)
+            val fStr = String(data)
+            sScore = Json.decodeFromString(fStr)
+            t.text = sScore.toString()
         }
         else
             Log.d("Web Service Log", "${error}")

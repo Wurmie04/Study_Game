@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_multiple_choice.*
@@ -24,6 +25,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
     private var score = 0
     private var qNa = 0
     private var index : MutableList<Int> = mutableListOf()
+    private var textList : MutableList<TextView> = mutableListOf()
+    private var layoutList : MutableList<LinearLayout> = mutableListOf()
     var HSscore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +36,9 @@ class MultipleChoiceActivity : AppCompatActivity() {
         val List1 : MutableList<String> = mutableListOf("0","1","2","3","4","5","6","7","8","9")
         val List1Answer : MutableList<String> = mutableListOf("a","b","c","d","e","f","g","h","i","j")
 
-
         //Choose which list to use
         verticalLayout{
+            layoutList.add(this)
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             textView("Choose Category"){
                 textSize = 35.0F
@@ -66,37 +69,36 @@ class MultipleChoiceActivity : AppCompatActivity() {
             button("Get High Score") {
                 textSize = 20.0F
                 setOnClickListener{
-                    submitGetHSServiceReq(MultipleChoiceActivity())
+                    layoutList.get(0).setVisibility(View.GONE)
                     createHighScoreLayout()
                 }
             }
         }
     }
-    private fun createHighScoreLayout() {
+    fun createHighScoreLayout() {
         verticalLayout{
             gravity = Gravity.CENTER
             textView("High Score"){
                 textSize = 20.0F
             }
-            textView("$HSscore"){
+            textView(""){
+                textList.add(this)
                 textSize = 20.0F
             }
             button("Return"){
                 textSize = 20.0F
                 setOnClickListener {
+                    //restart the activity
                     startActivity<MultipleChoiceActivity>("id" to 7)
                 }
             }
         }
-    }
-
-    public fun SQLscore(outScore : Int){
-        HSscore = outScore
+        submitGetHSServiceReq(MultipleChoiceActivity(),textList.get(0))
     }
 
     @SuppressLint("SetTextI18n")
     private fun startGame(qList:MutableList<String>, qAnswer:MutableList<String>) {
-        var didWin = false
+        var didWin: Boolean
         val txtView : MutableList<TextView> = mutableListOf()
         val buttonView : MutableList<Button> = mutableListOf()
         //set up what is under the cards
