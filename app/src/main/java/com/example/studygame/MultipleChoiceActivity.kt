@@ -32,9 +32,27 @@ class MultipleChoiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Create list of Questions and Answers
-        val List1 : MutableList<String> = mutableListOf("0","1","2","3","4","5","6","7","8","9")
-        val List1Answer : MutableList<String> = mutableListOf("a","b","c","d","e","f","g","h","i","j")
-
+        val LiteratureList : MutableList<String> = mutableListOf("To Kill a Mockingbird","Frankenstein","Harry Potter", "Animal Farm","Lord of the Flies","The Great Gatsby","Moby Dick","The Catcher in the Rye","The Adventures of Tom Sawyer",
+        "Pride and Prejudice", "Don Quixote", "Wuthering Heights","Lord of the Rings","To the Lighthouse","Fahrenheit 451","Great Expectations","Alice's Adventure in Wonderland", "Dracua","The Call of the Wild", "The Scarlet Letter")
+        val LiteratureAnswer : MutableList<String> = mutableListOf("Harper Lee","Mary Shelley","J.K. Rowling","George Orwell","William Golding","F. Scott Fitzgerald","Herman Melville","J.D. Salinger", "Mark Twain","Jane Austen","Miguel deCervantes",
+        "Emily Bronte","J.R.R. Tolkien","Virginia Woolf","Ray Bradbury","Charles Dickens","Lewis Carroll","Bram Stoker","Jack London","Nathaniel Hawthorne")
+        val HistoricalFigures : MutableList<String> = mutableListOf("Whose assasination is one of the reasons attributed to the start of World War 1?","Who is the only female emperor to ever sit on China’s throne of her own right?","Who is said to be the first emperor of unified China?",
+        "Who was a central figure during the Hundred Year’s War (right to rule over the Kingdom of France) that resulted in their being burnt at the stake, then later declared a martyr and a saint?","Who was an ancient Chinese philosopher and traditionally considered the paragon of Chinese sages, active during the Spring and Autumn period, whose teachings and philosophy are still followed by many Chinese and Asian cultures today?",
+        "Who was a famous French military leader that reformed France after the French Revolution with many notable achievements, one of which is developing a code for which is named after him?","Who was a great Japanese daimyo (feudal lord) known as the first “Great Unifier” of Japan during the Sengoku Period?\n",
+        "Who is known as the greatest Ottomon Sultan (absolute ruler) that codified a legal system that harmonized the legal and religious aspects of Ottomon law, and presided over a Golden Age in terms of architecture, literature, and art?", "Who was an Indian Prince and philosopher that is known as the founder of Buddhism?")
+        val HistoricalAnswers : MutableList<String> = mutableListOf("Franz Ferdinand","Wu Ze Tian","Qin Shi Huang","Joann of Arc","Confucius","Napoleon Bonaparte,","Oda Nobunaga","Suleiman the Magnificent","Siddhartha Guatama")
+        val Country : MutableList<String> = mutableListOf("Amazon Rainforest","Leaning Tower of Pisa","Palace of Versaille","Alhambra","Great Pyramid of Giza","Fuji Mountains","Big Ben","Neuschwanstein Castle","Burj Khalifa","Taj Mahal","Forbidden City","Tulum","Geongbokgung Palace",
+        "Iguazu Falls","Sydney Opera House","Mount Everest runs through Nepal and which country?","Borobudur Temple","Mount Kilimanjaro","Niagara Falls","Angkor Archaeological Park")
+        val CountryAnswer : MutableList<String> = mutableListOf("Brazil","Italy","France","Spain","Egypt","Japan","United Kingdom","Germany","United Arab Emirates","India","China","Mexico","Korea","Argentina","Australia",
+        "Tibet","Indonesia","Tanzania","Canada","Cambodia")
+        val Medical : MutableList<String> = mutableListOf("Cranium","Cornea","Thyroid Cartilage","Clavicles","Tibia","Hallux","Cerebrum","Integumentary System","Pinna","Frontalis","Gingiva","Sternum","Larynx","Vertebrae","Deltoid","Olecranon","Femu",
+        "Molars","Umbilicus","Calcaneus")
+        val MedicalAnswer : MutableList<String> = mutableListOf("Head/UpperSkull","Eye Whites","Adam's Apple","Collar Bone","Shin Bone","Big Toe","Uppermost Part of Brain","Skin,Hair,Nails","Outer Ear","Muscles that Raise Eyebrows","Gums","Breastbone","Voice Box",
+        "Spine","Shoulder Muscle","Elbow","Thigh Bone","Wisdom Teeth","Navel","Heel Bone")
+        val Anime : MutableList<String> = mutableListOf("Trafalgar D. Law","Roy Mustang","Hisoka Morow","Kamado Nezuko","Ryoumen Sukuna","Nunnally vi Brittania","Tsukishima Kei","Shiba Miyuki","Souma Yuuki","Megumin","Tomoe(Fox Demon)","Ishigami Senku","Sora/Shira",
+        "Tanya Degurechaff","Nakiri Erina","Hououin Kyouma","Yaboku","Hyakkimaru","Decim","Satou Mafuyu")
+        val AnimeAnswer : MutableList<String> = mutableListOf("One Piece","Full Metal Alchemist Brotherhood","HunterxHunter","Kimetsu no Yaiba","Jujutsu Kaisen","Code Geass","Haikyuu!!!","Mahouka Koukou no Rettousei","Fruits Basket","Konosuba",
+        "Kamisama Hajimemashita","Dr. Stone","No Game No Life","Youjo Senki","Shokugeki no Souma","Steins Gate","Noragami","Dororo","Death Parade","Given")
         //Choose which list to use
         verticalLayout{
             layoutList.add(this)
@@ -47,22 +65,38 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 setPadding(0,20, 0,0)
             }
             //Quiz Card Game
-            button("Computer Science"){
+            button("Literature Authors"){
                 textSize = 20.0F
                 setOnClickListener{
-                    startGame(List1,List1Answer)
+                    startGame(LiteratureList,LiteratureAnswer)
                 }
             }
-            button("Animals"){
+            /*
+            button("Historical Figures"){
                 textSize = 20.0F
                 setOnClickListener{
-
+                    Log.d("List1 ", "${LiteratureAnswer.size}")
+                    startGame(HistoricalFigures,HistoricalAnswers)
+                }
+            }*/
+            button("Countries where Points of Interests Located"){
+                textSize = 20.0F
+                setOnClickListener{
+                    startGame(Country,CountryAnswer)
                 }
             }
-            button("Anime"){
+            button("Medical Body Parts Terminology"){
                 textSize = 20.0F
                 setOnClickListener{
-
+                    startGame(Medical,MedicalAnswer)
+                }
+            }
+            button("Which Anime is Character From"){
+                textSize = 20.0F
+                setOnClickListener{
+                    Log.d("List ", "${Anime.size}")
+                    Log.d("List1 ", "${AnimeAnswer.size}")
+                    startGame(Anime,AnimeAnswer)
                 }
             }
             button("Get High Score") {
@@ -102,7 +136,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 }
             }
         }
-        submitGetHSServiceReq(MultipleChoiceActivity(),textList.get(0))
+        submitGetHSServiceReq(textList.get(0))
     }
 
     @SuppressLint("SetTextI18n")
@@ -140,7 +174,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
             //Question
             textView(qList.get(index.get(qNa))){
                 txtView.add(this)
-                textSize = 25.0F
+                textSize = 20.0F
                 setTextColor(Color.BLACK)
                 setBackgroundColor(Color.WHITE)
                 gravity = Gravity.CENTER or Gravity.TOP
@@ -152,6 +186,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
                 button(qAnswer.get(index.get(0))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(0,qNa)
                         //Green if you won
@@ -170,6 +205,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 }.lparams(width = 70, height = 70)
                 button(qAnswer.get(index.get(1))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(1, qNa)
                         if(didWin){
@@ -189,6 +225,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
                 button(qAnswer.get(index.get(2))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(2, qNa)
                         if(didWin){
@@ -203,6 +240,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 }.lparams(width = 70, height = 70)
                 button(qAnswer.get(index.get(3))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(3,qNa)
                         if(didWin){
@@ -222,6 +260,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
                 button(qAnswer.get(index.get(4))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(4, qNa)
                         if(didWin){
@@ -236,6 +275,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 }.lparams(width = 70, height = 70)
                 button(qAnswer.get(index.get(5))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(5,qNa)
                         if(didWin){
@@ -255,6 +295,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
                 button(qAnswer.get(index.get(6))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(6, qNa)
                         if(didWin){
@@ -269,6 +310,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 }.lparams(width = 70, height = 70)
                 button(qAnswer.get(index.get(7))){
                     buttonView.add(this)
+                    textSize = 10.0F
                     setOnClickListener{
                         didWin = play(7,qNa)
                         if(didWin){

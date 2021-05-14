@@ -11,7 +11,6 @@ import kotlinx.serialization.json.Json
 fun submitAddServiceReq(myScore : Int) {
     val sendScore = convertScore(myScore)
     val jsonStr = Json.encodeToString(sendScore)
-    Log.d("Here", jsonStr)
 
     //cannot use https
     Fuel.post("http://192.168.0.15:8080/StudyGame/addMCScore").body(jsonStr).response {
@@ -27,7 +26,7 @@ fun submitAddServiceReq(myScore : Int) {
         }
     }
 }
-fun submitGetHSServiceReq(outScore : MultipleChoiceActivity, t : TextView){
+fun submitGetHSServiceReq(t : TextView){
     var sScore = 0
     //get high scores for Multiple Choice
     Fuel.get("http://192.168.0.15:8080/StudyGame/MCHighScore").response(){
