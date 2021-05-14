@@ -49,13 +49,14 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
+            */
             button("Memory Game"){
                 textSize = 20.0F
                 setOnClickListener{
-
+                    startActivity<MemoryGameActivity>("id" to 5)
                 }
-             */
+
+            }
         }
     //setContentView(R.layout.activity_main)
     }

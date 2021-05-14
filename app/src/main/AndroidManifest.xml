@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.StudyGame">
+        <activity android:name=".MemoryGameActivity"></activity>
         <activity android:name=".MultipleChoiceActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

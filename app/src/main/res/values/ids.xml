@@ -2,4 +2,13 @@
 
 <resources>
     <item name = "name" type="id" />
+    <item name="Constraint_Layout" type="id" />
+    <item name="imageButton1" type="id" />
+    <item name="imageButton2" type="id" />
+    <item name="imageButton3" type="id" />
+    <item name="imageButton6" type="id" />
+    <item name="imageButton4" type="id" />
+    <item name="imageButton7" type="id" />
+    <item name="imageButton5" type="id" />
+    <item name="imageButton8" type="id" />
 </resources>

@@ -27,7 +27,6 @@ class MultipleChoiceActivity : AppCompatActivity() {
     private var index : MutableList<Int> = mutableListOf()
     private var textList : MutableList<TextView> = mutableListOf()
     private var layoutList : MutableList<LinearLayout> = mutableListOf()
-    var HSscore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -282,7 +281,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         //goes back to main menu
                         startActivity<MainActivity>("id" to 5)
                     }
-                }.lparams(width = 60, height = 30)
+                }
                 button("List Menu"){
                     textSize = 15.0F
                     setOnClickListener{
@@ -309,6 +308,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
     //update score. Put new question and answers
     private fun update(text : MutableList<TextView>, buttons : MutableList<Button>,
                        qList: MutableList<String>, qAnswer: MutableList<String>){
+
         index.shuffle()
         qNa = (0..7).random()
 
