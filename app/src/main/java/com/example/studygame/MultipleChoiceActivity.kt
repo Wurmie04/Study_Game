@@ -77,12 +77,16 @@ class MultipleChoiceActivity : AppCompatActivity() {
     fun createHighScoreLayout() {
         verticalLayout{
             gravity = Gravity.CENTER
-            textView("High Score"){
-                textSize = 20.0F
-            }
-            textView(""){
-                textList.add(this)
-                textSize = 20.0F
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            linearLayout {
+                textView("High Score:  ") {
+                    gravity = Gravity.CENTER
+                    textSize = 40.0F
+                }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                textView("") {
+                    textList.add(this)
+                    textSize = 40.0F
+                }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
             }
             button("Return"){
                 textSize = 20.0F
@@ -115,6 +119,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         //I think you can loop this to make the code easier
         //create score and buttons
         verticalLayout{
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             gravity = Gravity.CENTER
             //score
             textView("Score: $score"){
@@ -124,7 +129,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 setTextColor(Color.BLACK)
                 setBackgroundColor(Color.WHITE)
                 gravity = Gravity.CENTER or Gravity.TOP
-            }
+            }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             //Question
             textView(qList.get(index.get(qNa))){
                 txtView.add(this)
@@ -132,7 +137,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 setTextColor(Color.BLACK)
                 setBackgroundColor(Color.WHITE)
                 gravity = Gravity.CENTER or Gravity.TOP
-            }
+            }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             //Answers
             //first row
             linearLayout{
@@ -281,14 +286,14 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         //goes back to main menu
                         startActivity<MainActivity>("id" to 5)
                     }
-                }
+                }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
                 button("List Menu"){
                     textSize = 15.0F
                     setOnClickListener{
                         submitAddServiceReq(score)
                         startActivity<MultipleChoiceActivity>("id" to 6)
                     }
-                }
+                }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
             }
         }
     }
