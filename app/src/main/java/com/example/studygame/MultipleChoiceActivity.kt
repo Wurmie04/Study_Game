@@ -72,6 +72,12 @@ class MultipleChoiceActivity : AppCompatActivity() {
                     createHighScoreLayout()
                 }
             }
+            button("Main Menu"){
+                textSize = 20.0F
+                setOnClickListener{
+                    startActivity<MainActivity>("id" to 8)
+                }
+            }
         }
     }
     fun createHighScoreLayout() {
@@ -118,6 +124,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
         //I think you can loop this to make the code easier
         //create score and buttons
+        //need to set each box to a certain size that does not take up all of parent
         verticalLayout{
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             gravity = Gravity.CENTER
