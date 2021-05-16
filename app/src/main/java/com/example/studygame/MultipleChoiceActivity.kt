@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.marginRight
 import kotlinx.android.synthetic.main.activity_multiple_choice.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.*
@@ -33,7 +34,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
         //Create list of Questions and Answers
         val LiteratureList : MutableList<String> = mutableListOf("To Kill a Mockingbird","Frankenstein","Harry Potter", "Animal Farm","Lord of the Flies","The Great Gatsby","Moby Dick","The Catcher in the Rye","The Adventures of Tom Sawyer",
-        "Pride and Prejudice", "Don Quixote", "Wuthering Heights","Lord of the Rings","To the Lighthouse","Fahrenheit 451","Great Expectations","Alice's Adventure in Wonderland", "Dracua","The Call of the Wild", "The Scarlet Letter")
+        "Pride and Prejudice", "Don Quixote", "Wuthering Heights","Lord of the Rings","To the Lighthouse","Fahrenheit 451","Great Expectations","Alice's Adventure in Wonderland", "Dracula","The Call of the Wild", "The Scarlet Letter")
         val LiteratureAnswer : MutableList<String> = mutableListOf("Harper Lee","Mary Shelley","J.K. Rowling","George Orwell","William Golding","F. Scott Fitzgerald","Herman Melville","J.D. Salinger", "Mark Twain","Jane Austen","Miguel deCervantes",
         "Emily Bronte","J.R.R. Tolkien","Virginia Woolf","Ray Bradbury","Charles Dickens","Lewis Carroll","Bram Stoker","Jack London","Nathaniel Hawthorne")
         val HistoricalFigures : MutableList<String> = mutableListOf("Whose assasination is one of the reasons attributed to the start of World War 1?","Who is the only female emperor to ever sit on China’s throne of her own right?","Who is said to be the first emperor of unified China?",
@@ -53,20 +54,24 @@ class MultipleChoiceActivity : AppCompatActivity() {
         "Tanya Degurechaff","Nakiri Erina","Hououin Kyouma","Yaboku","Hyakkimaru","Decim","Satou Mafuyu")
         val AnimeAnswer : MutableList<String> = mutableListOf("One Piece","Full Metal Alchemist Brotherhood","HunterxHunter","Kimetsu no Yaiba","Jujutsu Kaisen","Code Geass","Haikyuu!!!","Mahouka Koukou no Rettousei","Fruits Basket","Konosuba",
         "Kamisama Hajimemashita","Dr. Stone","No Game No Life","Youjo Senki","Shokugeki no Souma","Steins Gate","Noragami","Dororo","Death Parade","Given")
+
         //Choose which list to use
         verticalLayout{
             layoutList.add(this)
+            setBackgroundColor(Color.parseColor("#BCB8CE"))
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             textView("Choose Category"){
                 textSize = 35.0F
-                setTextColor(Color.RED)
-                setBackgroundColor(Color.BLUE)
+                setTextColor(Color.parseColor("#D5DDEF"))
+                setBackgroundColor(Color.parseColor("#4C394F"))
                 gravity = Gravity.CENTER
-                setPadding(0,20, 0,0)
+                setPadding(0,20, 0,20)
             }
             //Quiz Card Game
-            button("Literature Authors"){
+            button("Literature"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     startGame(LiteratureList,LiteratureAnswer)
                 }
@@ -75,32 +80,37 @@ class MultipleChoiceActivity : AppCompatActivity() {
             button("Historical Figures"){
                 textSize = 20.0F
                 setOnClickListener{
-                    Log.d("List1 ", "${LiteratureAnswer.size}")
                     startGame(HistoricalFigures,HistoricalAnswers)
                 }
             }*/
-            button("Countries where Points of Interests Located"){
+            button("Geographical Hotspots"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     startGame(Country,CountryAnswer)
                 }
             }
-            button("Medical Body Parts Terminology"){
+            button("Medical Terminology"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     startGame(Medical,MedicalAnswer)
                 }
             }
-            button("Which Anime is Character From"){
+            button("Anime"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
-                    Log.d("List ", "${Anime.size}")
-                    Log.d("List1 ", "${AnimeAnswer.size}")
                     startGame(Anime,AnimeAnswer)
                 }
             }
-            button("Get High Score") {
+            button("High Score") {
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#D5DDEF"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     layoutList.get(0).setVisibility(View.GONE)
                     createHighScoreLayout()
@@ -108,6 +118,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
             }
             button("Main Menu"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#D5DDEF"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     startActivity<MainActivity>("id" to 8)
                 }
@@ -162,21 +174,22 @@ class MultipleChoiceActivity : AppCompatActivity() {
         verticalLayout{
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             gravity = Gravity.CENTER
+            setBackgroundColor(Color.parseColor("#917898"))
             //score
             textView("Score: $score"){
                 txtView.add(this)
                 id = R.id.score
                 textSize = 20.0F
-                setTextColor(Color.BLACK)
-                setBackgroundColor(Color.WHITE)
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 gravity = Gravity.CENTER or Gravity.TOP
             }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             //Question
             textView(qList.get(index.get(qNa))){
                 txtView.add(this)
                 textSize = 20.0F
-                setTextColor(Color.BLACK)
-                setBackgroundColor(Color.WHITE)
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 gravity = Gravity.CENTER or Gravity.TOP
             }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             //Answers
@@ -187,6 +200,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(0))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(0,qNa)
                         //Green if you won
@@ -206,6 +221,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(1))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(1, qNa)
                         if(didWin){
@@ -226,6 +243,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(2))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(2, qNa)
                         if(didWin){
@@ -241,6 +260,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(3))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(3,qNa)
                         if(didWin){
@@ -261,6 +282,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(4))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(4, qNa)
                         if(didWin){
@@ -276,6 +299,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(5))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(5,qNa)
                         if(didWin){
@@ -296,6 +321,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(6))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(6, qNa)
                         if(didWin){
@@ -311,6 +338,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 button(qAnswer.get(index.get(7))){
                     buttonView.add(this)
                     textSize = 10.0F
+                    setTextColor(Color.parseColor("#2E1A1E"))
+                    setBackgroundColor(Color.parseColor("#D5DDEF"))
                     setOnClickListener{
                         didWin = play(7,qNa)
                         if(didWin){
@@ -328,7 +357,10 @@ class MultipleChoiceActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
                 //Quits the game and stores the end score into database
                 button("Main Menu"){
+                    setPadding(3,0,4,0)
                     textSize = 15.0F
+                    setTextColor(Color.parseColor("#D5DDEF"))
+                    setBackgroundColor(Color.parseColor("#4C394F"))
                     setOnClickListener{
                         //puts score into database
                         submitAddServiceReq(score)
@@ -336,8 +368,11 @@ class MultipleChoiceActivity : AppCompatActivity() {
                         startActivity<MainActivity>("id" to 5)
                     }
                 }.lparams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                button("List Menu"){
+                button("Categories"){
+                    setPadding(4,0,3,0)
                     textSize = 15.0F
+                    setTextColor(Color.parseColor("#D5DDEF"))
+                    setBackgroundColor(Color.parseColor("#4C394F"))
                     setOnClickListener{
                         submitAddServiceReq(score)
                         startActivity<MultipleChoiceActivity>("id" to 6)
@@ -372,7 +407,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
         for(buttons in buttons) {
             buttons.text = qAnswer.get(index.get(i))
             i = i + 1
-            buttons.setBackgroundColor(Color.LTGRAY)
+            buttons.setTextColor(Color.parseColor("#2E1A1E"))
+            buttons.setBackgroundColor(Color.parseColor("#D5DDEF"))
         }
     }
 }

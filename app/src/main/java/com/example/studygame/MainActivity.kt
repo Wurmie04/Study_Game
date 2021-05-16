@@ -3,6 +3,7 @@ package com.example.studygame
 import android.app.ActionBar
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -28,17 +29,21 @@ class MainActivity : AppCompatActivity() {
 
         //Main Menu Layout
         verticalLayout{
+            setBackgroundColor(Color.parseColor("#BCB8CE"))
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            textView("Best Game"){
+            textView("Study Buddy"){
                 textSize = 35.0F
-                setTextColor(Color.RED)
-                setBackgroundColor(Color.BLUE)
+                Typeface.BOLD
+                setTextColor(Color.parseColor("#D5DDEF"))
+                setBackgroundColor(Color.parseColor("#4C394F"))
                 gravity = Gravity.CENTER
-                setPadding(0,20, 0,0)
+                setPadding(0,20, 0,20)
             }
             //Quiz Card Game
             button("Quiz Game"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     startActivity<MultipleChoiceActivity>("id" to 5)
                 }
@@ -52,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             */
             button("Memory Game"){
                 textSize = 20.0F
+                setTextColor(Color.parseColor("#2E1A1E"))
+                setBackgroundColor(Color.parseColor("#917898"))
                 setOnClickListener{
                     startActivity<MemoryGameActivity>("id" to 5)
                 }
